@@ -56,7 +56,7 @@ player_cards = []
 
 play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
 
-while play == 'y':
+if play == 'y':
     clear_screen()
     print(art.logo)
     player_score = deal_player(player_score)
