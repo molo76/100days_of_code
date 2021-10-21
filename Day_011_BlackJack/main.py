@@ -48,15 +48,14 @@ def deal_computer(computer_score):
 cards = [2,3,4,5,6,7,8,9,"Jack","Queen","King","Ace"]
 picture_cards = ["Jack","Queen","King"]
 
-computer_score = 0
-computer_cards = []
-
-player_score = 0
-player_cards = []
-
 play = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
 
-if play == 'y':
+while play == 'y':
+    computer_score = 0
+    computer_cards = []
+    player_score = 0
+    player_cards = []
+
     clear_screen()
     print(art.logo)
     player_score = deal_player(player_score)
@@ -88,7 +87,7 @@ if play == 'y':
         print("Computer went bust, you win!") 
     if player_score <= 21 and computer_score > player_score and computer_score <= 21:
         print("Computer wins, you Lose!") 
-    # play = input("Would you like to play again? Type 'y' or 'n': ")
+    play = input("Would you like to play again? Type 'y' or 'n': ")
     
 
     

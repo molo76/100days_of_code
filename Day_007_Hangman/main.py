@@ -9,7 +9,7 @@ chosen_word = random.choice(word_list)
 print(hangman_art.logo)
 
 #Testing code
-print(f'Pssst, the solution is {chosen_word}.')
+#print(f'Pssst, the solution is {chosen_word}.')
 
 display = []
 word_length = len(chosen_word)
