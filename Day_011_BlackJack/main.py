@@ -1,5 +1,5 @@
 import art
-from random import randint
+from random import choice, randint
 from os import system, name
 
 def clear_screen():
@@ -27,21 +27,21 @@ def card_value(card):
 
 def deal_player(player_score):
     if player_score == 0:
-        player_cards.append(cards[randint(0,11)])
-        player_cards.append(cards[randint(0,11)])    
+        player_cards.append(choice(cards))
+        player_cards.append(choice(cards))    
         for card in player_cards:
             player_score += card_value(card)
     else:
-        player_cards.append(cards[randint(0,11)])
+        player_cards.append(choice(cards))
         player_score += card_value(player_cards[-1])
     return player_score
 
 def deal_computer(computer_score):
     if computer_score == 0:
-        computer_cards.append(cards[randint(0,11)])
+        computer_cards.append(choice(cards))
         computer_score += card_value(computer_cards[0])
     elif computer_score <= 16: 
-        computer_cards.append(cards[randint(0,11)])
+        computer_cards.append(choice(cards))
         computer_score += card_value(computer_cards[-1])
     return computer_score
 
