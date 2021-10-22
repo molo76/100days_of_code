@@ -1,5 +1,5 @@
 import art
-from random import choice, randint
+from random import choice
 from os import system, name
 
 def clear_screen():
@@ -12,16 +12,13 @@ def clear_screen():
 def card_value(card):
     value = 0
     if card in picture_cards:
-        #print(f"It's a picture - {card}")
         value = 10
     elif card == "Ace":        
-        #print(f"it's an Ace!!! - {card}")
         if player_score <= 10:
             value = 11
         else: 
             value = 1
     else:
-        #print(f"It's just a number - {card}")
         value = card
     return value
 
