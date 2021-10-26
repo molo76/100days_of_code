@@ -8,10 +8,12 @@ def check_number(player_guess, guesses_left):
         guesses_left = 0
         return guesses_left
     elif player_guess > number:
-        print(f"Too high, you have to choose again!") 
+        print("Too high, you have to choose again!")
+        print(f"You have {guesses_left} guesses left.") 
         return guesses_left
     else:
-        print(f"Too low, choose again!")
+        print("Too low, choose again!")
+        print(f"You have {guesses_left} guesses left.")
         return guesses_left
 
 play = 'y'
@@ -31,7 +33,6 @@ while play == 'y':
         guesses = 5
     
     while guesses > 0:
-        print(guesses)
         guess = int(input("Guess a number: "))
         guesses=(check_number(guess, guesses))
         if guesses == 0 and guess != number:
