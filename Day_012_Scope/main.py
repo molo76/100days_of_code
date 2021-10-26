@@ -4,6 +4,16 @@ from random import randint
 EASY_LEVEL = 10
 HARD_LEVEL = 5
 
+
+def difficulty_level(player_choice):
+    if player_choice == "easy": 
+        print("You selected 'easy', you have 10 guesses!\n")
+        return EASY_LEVEL
+    else: 
+        print("You selected 'hard', you have 5 guesses!\n")
+        return HARD_LEVEL
+
+
 def check_number(player_guess, guesses_left):
     guesses_left -= 1
     if player_guess == number:
@@ -19,13 +29,6 @@ def check_number(player_guess, guesses_left):
         print(f"You have {guesses_left} guesses left.\n")
         return guesses_left
 
-def difficulty_level(player_choice):
-    if player_choice == "easy": 
-        print("You selected 'easy', you have 10 guesses!\n")
-        return EASY_LEVEL
-    else: 
-        print("You selected 'hard', you have 5 guesses!\n")
-        return HARD_LEVEL
 
 play = 'y'
 while play == 'y':
