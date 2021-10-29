@@ -1,3 +1,4 @@
+import os
 import art
 import random
 from random import randint
@@ -33,6 +34,7 @@ while play == True:
     first_dataset = datasets[0]
     second_dataset = datasets[1]
 
+    os.system('clear')
     print(art.logo)
     if current_score > 0:
         print(f"You're right, current score = {current_score}")
@@ -53,6 +55,8 @@ while play == True:
     
     if choice == winner:
         current_score += 1
-    else: 
+    else:
+        os.system('clear') 
+        print(art.logo)
         print(f"Sorry you're wrong. Final score = {current_score}")
         play = False
