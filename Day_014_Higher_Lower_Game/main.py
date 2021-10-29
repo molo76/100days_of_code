@@ -1,36 +1,36 @@
 import os
 import art
 import random
-from random import randint
 from game_data import data
 
-def select_datasets(already_used, previous_winner):
+
+def select_datasets(previous_winner):
     if current_score == 0:
         first = random.choice(data)
         second = random.choice(data)
     else:
         first = previous_winner
         second = random.choice(data)
-    while first["name"] in already_used:
-        first = random.choice(data)
-    while second["name"] in already_used or second["name"] == first["name"]:
+    while second["name"] == first["name"]:
         second = random.choice(data)
-    return [first,second]
+    return [first, second]
+
 
 def comparison(compare_a, compare_b):
     if compare_a['follower_count'] > compare_b['follower_count']:
-        return compare_a['name'], compare_a['follower_count']
+        return compare_a
     if compare_a['follower_count'] < compare_b['follower_count']:
-        return compare_b['name'], compare_b['follower_count']
+        return compare_b
+
 
 play = True
 current_score = 0
-used_datasets = []
 first_dataset = {}
 second_dataset = {}
+winner = {}
 
-while play == True:
-    datasets = select_datasets(used_datasets, second_dataset)
+while play:
+    datasets = select_datasets(winner)
     first_dataset = datasets[0]
     second_dataset = datasets[1]
 
@@ -42,16 +42,16 @@ while play == True:
     print(art.vs)
     print(f"\nAgainst B: {second_dataset['name']}, {second_dataset['description']}, {second_dataset['country']}")
     
-    winner = comparison(first_dataset, second_dataset)[0]
+    winner = comparison(first_dataset, second_dataset)
     # print(winner)
     
-    choice = input("Who has more instragram followers, type 'A' or 'B': ").upper()
+    choice = input("Who has more instagram followers, type 'A' or 'B': ").upper()
     if choice == 'A':
-        choice = first_dataset['name']
+        choice = first_dataset
     elif choice == 'B':
-        choice = second_dataset['name']
+        choice = second_dataset
     else: 
-        print("You didnt type 'A' or 'B', you are the loser here")
+        print("You didn't type 'A' or 'B', you are the loser here")
     
     if choice == winner:
         current_score += 1
