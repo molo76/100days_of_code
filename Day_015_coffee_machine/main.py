@@ -1,5 +1,8 @@
+from os import system
+from time import sleep
 from data import MENU
 from art import logo
+
 
 def report():
     for resource in resources:
@@ -47,8 +50,18 @@ def make_drink(chosen_drink, drink_name):
     for ingredient in chosen_drink['ingredients']:
         resources[ingredient] -= chosen_drink['ingredients'][ingredient]
     resources['money'] += chosen_drink['cost']
-    print(f"Here is your {drink_name}...Enjoy!")
+    print("Making your drink now.....")
+    wait = 0
+    dots = ""
+    while wait < 5:
+        dots += "."
+        print(dots)
+        sleep(1)
+        wait += 1
+    print(f"\nHere is your {drink_name}...Enjoy!")
 
+
+drinks = ['espresso', 'latte', 'cappuccino']
 
 resources = {
     'water': 300,
@@ -65,6 +78,7 @@ coins_accepted = {
 }
 
 power = True
+system('clear')
 
 while power:
     print(logo)
@@ -74,7 +88,13 @@ while power:
     elif user_choice == 'off':
         power = False
     else:
-        beverage = MENU[user_choice]
-        if resource_check(beverage):
-            insert_coins(beverage["cost"], user_choice)
-            make_drink(beverage, user_choice)
+        if user_choice not in drinks:
+            print("Drink choice not recognised, please try again.")
+        else:
+            beverage = MENU[user_choice]
+            if resource_check(beverage):
+                insert_coins(beverage["cost"], user_choice)
+                make_drink(beverage, user_choice)
+    sleep(2)
+    system('clear')
+
