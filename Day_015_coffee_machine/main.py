@@ -1,5 +1,5 @@
 from data import MENU
-
+from art import logo
 
 def report():
     for resource in resources:
@@ -10,24 +10,24 @@ def report():
         elif resource == 'coffee':
             print(f"Coffee: {resources['coffee']}g")
         else:
-            print(f"Money: £{resources['money']}")
+            money = "{:.2f}".format(resources['money'])
+            print(f"Money: £{money}")
 
 
 def resource_check(chosen_drink):
-    print(chosen_drink)
     for ingredient in chosen_drink['ingredients']:
         amount_required = chosen_drink['ingredients'][ingredient]
         amount_available = resources[ingredient]
         if amount_required > amount_available:
-            print(f"Not enough {ingredient} in machine at present, {amount_required} required, {amount_available} available ")
+            print(f"Sorry, there is not enough {ingredient} in the machine at present, please select an alternative.")
             return False
     return True
 
 
-def insert_coins(amount_due):
+def insert_coins(amount_due, drink_name):
     total_inserted = 0
     printable_amount = "{:.2f}".format(amount_due)
-    print(f"The cost of your chosen drink is ${printable_amount}")
+    print(f"Your choice: {drink_name}. The cost is ${printable_amount}.")
     while total_inserted < amount_due:
         print("Please enter coins...")
         for coin in coins_accepted:
@@ -37,19 +37,22 @@ def insert_coins(amount_due):
         if total_inserted < amount_due:
             print(f"${printable_total_inserted} is not enough please insert more coins")
         else:
-            print(printable_total_inserted)
+            print(f"You have inserted ${printable_total_inserted}, thank you. ")
             if total_inserted > amount_due:
-                change = round(total_inserted - amount_due, 2)
-                print(f"You inserted ${printable_total_inserted}, here is ${change} change.")
+                change = "{:.2f}".format(round(total_inserted - amount_due, 2))
+                print(f"Here is ${change} change.")
 
 
-def make_drink(chosen_drink):
-    
+def make_drink(chosen_drink, drink_name):
+    for ingredient in chosen_drink['ingredients']:
+        resources[ingredient] -= chosen_drink['ingredients'][ingredient]
+    resources['money'] += chosen_drink['cost']
+    print(f"Here is your {drink_name}...Enjoy!")
 
 
 resources = {
     'water': 300,
-    'milk': 20,
+    'milk': 200,
     'coffee': 100,
     'money': 0,
 }
@@ -64,40 +67,14 @@ coins_accepted = {
 power = True
 
 while power:
+    print(logo)
     user_choice = input("\nWhat would you like? (espresso/latte/cappuccino): ").lower()
     if user_choice == 'report':
-        print(report())
+        report()
     elif user_choice == 'off':
         power = False
     else:
         beverage = MENU[user_choice]
         if resource_check(beverage):
-            insert_coins(beverage["cost"])
-            make_drink(beverage)
-
-
-
-
-
-
-
-# TODO: 1 - print report
-# TODO: 2 - check resources sufficient
-# TODO: 3 - process coins
-# TODO: 4 - check transaction successful
-# TODO: 5 - make coffee!
-
-# Water: 300ml
-# Milk: 200ml
-# Coffee: 100g
-# Money: $0
-
-
-
-
-# Please insert coins.
-# how many quarters?: 0
-# how many dimes?: 0
-# how many nickles?: 0
-# how many pennies?: 0
-# Sorry that's not enough money. Money refunded.
+            insert_coins(beverage["cost"], user_choice)
+            make_drink(beverage, user_choice)
