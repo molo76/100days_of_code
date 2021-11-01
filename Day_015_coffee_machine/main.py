@@ -5,23 +5,16 @@ from art import logo
 
 
 def report():
-    for resource in resources:
-        if resource == 'water':
-            print(f"Water: {resources['water']}ml")
-        elif resource == 'milk':
-            print(f"Milk: {resources['milk']}ml")
-        elif resource == 'coffee':
-            print(f"Coffee: {resources['coffee']}g")
-        else:
-            money = "{:.2f}".format(resources['money'])
-            print(f"Money: £{money}")
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        money = "{:.2f}".format(resources['money'])
+        print(f"Money: £{money}")
 
 
 def resource_check(chosen_drink):
     for ingredient in chosen_drink['ingredients']:
-        amount_required = chosen_drink['ingredients'][ingredient]
-        amount_available = resources[ingredient]
-        if amount_required > amount_available:
+        if chosen_drink['ingredients'][ingredient] > resources[ingredient]:
             print(f"Sorry, there is not enough {ingredient} in the machine at present, please select an alternative.")
             return False
     return True
@@ -30,9 +23,8 @@ def resource_check(chosen_drink):
 def insert_coins(amount_due, drink_name):
     total_inserted = 0
     printable_amount = "{:.2f}".format(amount_due)
-    print(f"Your choice: {drink_name}. The cost is ${printable_amount}.")
+    print(f"Your choice: {drink_name}. The cost is ${printable_amount}.\nPlease insert coins.....")
     while total_inserted < amount_due:
-        print("Please enter coins...")
         for coin in coins_accepted:
             inserted = int(input(f"how many {coin}?")) * coins_accepted[coin]
             total_inserted += inserted
@@ -58,7 +50,7 @@ def make_drink(chosen_drink, drink_name):
         print(dots)
         sleep(1)
         wait += 1
-    print(f"\nHere is your {drink_name}...Enjoy!")
+    print(f"\nHere is your {drink_name} -> ☕️  Enjoy!")
 
 
 drinks = ['espresso', 'latte', 'cappuccino']
@@ -95,6 +87,6 @@ while power:
             if resource_check(beverage):
                 insert_coins(beverage["cost"], user_choice)
                 make_drink(beverage, user_choice)
-    sleep(2)
+    sleep(3)
     system('clear')
 
