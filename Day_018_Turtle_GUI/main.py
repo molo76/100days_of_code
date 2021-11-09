@@ -1,5 +1,6 @@
 from turtle import Turtle, Screen
 from random import randint
+from random import choice
 
 timmy = Turtle()
 screen = Screen()
@@ -20,11 +21,21 @@ def draw_shape(sides):
         timmy.rt(360 / sides)
 
 
-for num in range(3, 21):
-    pen_color = (randint(0,255), randint(0,255), randint(0,255))
-    timmy.pencolor(pen_color)
-    draw_shape(num)
+# for num in range(3, 21):
+#     pen_color = (randint(0,255), randint(0,255), randint(0,255))
+#     timmy.pencolor(pen_color)
+#     draw_shape(num)
 
+# Randomn Walk
+
+for num in range(1000):
+    pen_color = (randint(0, 255), randint(0, 255), randint(0, 255))
+    timmy.pensize(10)
+    timmy.speed(0)
+    timmy.pencolor(pen_color)
+    options = [0, 90, 180, 270]
+    timmy.seth(choice(options))
+    timmy.fd(30)
 
 
 
