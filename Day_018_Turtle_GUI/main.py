@@ -28,19 +28,33 @@ def draw_shape(sides):
 
 # Randomn Walk
 
-for num in range(1000):
-    pen_color = (randint(0, 255), randint(0, 255), randint(0, 255))
-    timmy.pensize(10)
-    timmy.speed(0)
-    timmy.pencolor(pen_color)
-    options = [0, 90, 180, 270]
-    timmy.seth(choice(options))
-    timmy.fd(30)
+def random_color():
+    r = randint(0, 255)
+    g = randint(0, 255)
+    b = randint(0, 255)
+    return (r, g, b)
+
+# for num in range(1000):
+#     pen_color = (random_color())
+#     timmy.pensize(10)
+#     timmy.speed(0)
+#     timmy.pencolor(pen_color)
+#     options = [0, 90, 180, 270]
+#     timmy.seth(choice(options))
+#     timmy.fd(30)
 
 
+timmy.speed(0)
 
 
+def draw_spirograph(offset):
+    for num in range(int(360 / offset)):
+        timmy.pencolor(random_color())
+        timmy.circle(100)
+        timmy.setheading(timmy.heading() + offset)
 
+
+draw_spirograph(10)
 
 
 
