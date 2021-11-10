@@ -55,14 +55,4 @@ def draw_spirograph(offset):
 
 
 draw_spirograph(10)
-
-
-
-
-
-
-
-
-
-
 screen.exitonclick()
