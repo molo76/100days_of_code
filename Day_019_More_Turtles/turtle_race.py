@@ -3,12 +3,12 @@ import random
 
 screen = Screen()
 
-t1 = Turtle()
-t2 = Turtle()
-t3 = Turtle()
-t4 = Turtle()
-t5 = Turtle()
-t6 = Turtle()
+t1 = Turtle(shape="turtle")
+t2 = Turtle(shape="turtle")
+t3 = Turtle(shape="turtle")
+t4 = Turtle(shape="turtle")
+t5 = Turtle(shape="turtle")
+t6 = Turtle(shape="turtle")
 finish_line = Turtle()
 
 turtles = [t1, t2, t3, t4, t5, t6]
@@ -27,7 +27,6 @@ def create_finish_line():
 def initialise_turtles():
     y_cord = -150
     for turtle in turtles:
-        turtle.shape('turtle')
         y_cord += 50
         turtle.pu()
         chosen_colour = random.choice(colours)
