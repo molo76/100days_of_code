@@ -29,4 +29,14 @@ while game_running:
     if snake.head.distance(food) < 15:
         food.refresh()
 
+    if snake.head.xcor() >= 300:
+        snake.head.setx(-300)
+    elif snake.head.xcor() <= -300:
+        snake.head.setx(300)
+    elif snake.head.ycor() >= 300:
+        snake.head.sety(-300)
+    elif snake.head.ycor() <= -300:
+        snake.head.sety(300)
+
+
 screen.exitonclick()
