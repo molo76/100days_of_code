@@ -12,11 +12,11 @@ with open('./Input/Names/invited_names.txt', 'r') as invited_names:
     for i in range(len(names_list)):
         names_list[i] = names_list[i].strip('\n')
 
-    with open('./Input/Letters/starting_letter.txt', 'r') as letter_template:
-        template = letter_template.read()
+with open('./Input/Letters/starting_letter.txt', 'r') as letter_template:
+    template = letter_template.read()
 
-    for name in names_list:
-        with open(f'./Output/ReadyToSend/letter_for_{name}.txt', 'w') as letter_to_send:
-            letter_to_send.write(template.replace('[name]', name))
+for name in names_list:
+    with open(f'./Output/ReadyToSend/letter_for_{name}.txt', 'w') as letter_to_send:
+        letter_to_send.write(template.replace('[name]', name))
 
 
