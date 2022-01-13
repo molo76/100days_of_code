@@ -15,10 +15,7 @@ states = data.state.to_list()
 while len(states_guessed) < 50:
     answer_state = screen.textinput(title=f'{len(states_guessed)}/50 - Guess the state', prompt='Enter a state').title()
     if answer_state == 'Exit':
-        for state in states:
-            if state not in states_guessed:
-                states_missed.append(state)
-
+        states_missed = [state for state in states if state not in states_guessed]
         if len(states_missed) > 0:
             output_dict = {
                 'state': [],
@@ -33,6 +30,8 @@ while len(states_guessed) < 50:
 
             output_data = pd.DataFrame(output_dict)
             output_data.to_csv('missed_states.csv')
+            break
+
     if answer_state in states:
         states_guessed.append(answer_state)
         state = turtle.Turtle()
@@ -48,7 +47,7 @@ while len(states_guessed) < 50:
         state.goto(state_data.x.item(), state_data.y.item())
         state.write(answer_state, align='left', font=FONT)
 
-if states_guessed == 50:
+if states_guessed >= 50:
     completed = turtle.Turtle()
     completed.penup()
     completed.hideturtle()
