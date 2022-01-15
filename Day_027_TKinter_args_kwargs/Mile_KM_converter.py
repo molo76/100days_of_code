@@ -3,23 +3,15 @@ from tkinter import *
 
 def calculate():
     if radio_state.get() == 1:
-        km_to_miles()
+        top_label.config(text='Miles')
+        bottom_label.config(text='Km')
+        result_label.config(text=round(float(text_input.get()) * 1.6, 2))
     elif radio_state.get() == 2:
-        miles_to_km()
+        top_label.config(text='Km')
+        bottom_label.config(text='Miles')
+        result_label.config(text=round(float(text_input.get()) / 1.6, 2))
     else:
         pass
-
-
-def miles_to_km():
-    top_label.config(text='Miles')
-    bottom_label.config(text='Km')
-    result_label.config(text=round(float(text_input.get()) * 1.6, 2))
-
-
-def km_to_miles():
-    top_label.config(text='Km')
-    bottom_label.config(text='Miles')
-    result_label.config(text=round(float(text_input.get()) / 1.6, 2))
 
 
 window = Tk()
@@ -41,7 +33,7 @@ top_label.grid(column=2, row=2)
 is_equal_label = Label(text='is equal to')
 is_equal_label.grid(column=0, row=3)
 
-result_label = Label(text=0)
+result_label = Label(text=0.0)
 result_label.grid(column=1, row=3)
 
 bottom_label = Label(text='Km')
@@ -55,8 +47,8 @@ button = Button(text='Calculate', command=calculate)
 button.grid(column=1, row=4)
 
 radio_state = IntVar()
-radiobutton1 = Radiobutton(text="Km to Miles", value=1, variable=radio_state, command=km_to_miles)
-radiobutton2 = Radiobutton(text="Miles to Km", value=2, variable=radio_state, command=miles_to_km)
+radiobutton1 = Radiobutton(text="Km to Miles", value=1, variable=radio_state, command=calculate)
+radiobutton2 = Radiobutton(text="Miles to Km", value=2, variable=radio_state, command=calculate)
 radiobutton1.grid(column=0, row=0)
 radiobutton2.grid(column=0, row=1)
 
