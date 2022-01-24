@@ -1,5 +1,6 @@
 from tkinter import *
-import random
+from tkinter import messagebox
+from random import choice, shuffle, randint
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -7,31 +8,40 @@ letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
            'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+', '^', '[', ']']
 passwd = ''
 
+
 def gen_pwd():
-    letter_chars = [random.choice(letters) for n in range(1, 9)]
-    number_chars = [random.choice(numbers) for n in range(1, 4)]
-    symbol_chars = [random.choice(symbols) for n in range(1, 2)]
-    password_list = letter_chars + number_chars + symbol_chars
-    random.shuffle(password_list)
     global passwd
-    for char in password_list:
-        passwd += char
+    passwd = ''
+    letter_chars = [choice(letters) for _ in range(randint(8, 10))]
+    number_chars = [choice(numbers) for _ in range(randint(2, 4))]
+    symbol_chars = [choice(symbols) for _ in range(randint(2, 4))]
+    password_list = letter_chars + number_chars + symbol_chars
+    shuffle(password_list)
+    passwd = ''.join(password_list)
+    pwd_entry.delete(0, END)
     pwd_entry.insert(END, string=passwd)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
 
 def save():
     website = website_text_entry.get()
     email_uname = email_uname_entry.get()
     pwd = pwd_entry.get()
-    f = open('saved_pwds.txt', 'a')
-    f.write(f'{website}|{email_uname}|{pwd}\n')
-    website_text_entry.delete(0, len(website))
-    pwd_entry.delete(0, len(pwd))
-    website_text_entry.focus()
+    if len(website) == 0 or len(pwd) == 0 or len(email_uname) == 0:
+        messagebox.showinfo(title='empty fields detected', message="Please don't leave any fields empty")
+    else:
+        is_ok = messagebox.askokcancel(title=website, message=f'These are the details entered:\n '
+                                                      f'Email: {email_uname}\n Password: {pwd}\nIs it ok to save?')
+        if is_ok:
+            f = open('saved_pwds.txt', 'a')
+            f.write(f'{website}|{email_uname}|{pwd}\n')
+            website_text_entry.delete(0, END)
+            pwd_entry.delete(0, END)
+            website_text_entry.focus()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
