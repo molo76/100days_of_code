@@ -69,10 +69,8 @@ def search():
             print(data[website])
             password = data[website]['pwd']
             email = data[website]['email']
-            pwd_entry.delete(0, END)
-            pwd_entry.insert(0, string=password)
-            email_uname_entry.delete(0, END)
-            email_uname_entry.insert(0, string=email)
+            pyperclip.copy(password)
+            messagebox.showinfo(title='Password found', message=f'Website = {website}\nEmail = {email}\nPassword = {password}\n\nThe password has been copied to your clipboard')
     except FileNotFoundError:
         messagebox.showinfo(title='No saved passwords', message="There are no saved passwords\nPlease create and save a password to use the search function")
     except KeyError:
@@ -96,7 +94,7 @@ canvas.grid(row=0, column=1)
 website_label = Label(text='Website:')
 website_label.grid(row=1, column=0 )
 
-website_text_entry = Entry(width=20)
+website_text_entry = Entry(width=21)
 website_text_entry.grid(row=1, column=1)
 website_text_entry.focus()
 
