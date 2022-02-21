@@ -53,12 +53,22 @@ def save():
         else:
             data.update(new_data)
             with open('data.json', 'w') as f:
-                json.dump(new_data, f, indent=2)
+                json.dump(data, f, indent=2)
         finally:
             website_text_entry.delete(0, END)
             pwd_entry.delete(0, END)
             website_text_entry.focus()
 
+
+def search():
+    print('im looking for something')
+    website = website_text_entry.get()
+    try:
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+            print(data[website])
+    except FileNotFoundError:
+        print("no File!")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -74,9 +84,13 @@ canvas.grid(row=0, column=1)
 website_label = Label(text='Website:')
 website_label.grid(row=1, column=0 )
 
-website_text_entry = Entry(width=39)
-website_text_entry.grid(row=1, column=1, columnspan=2)
+website_text_entry = Entry(width=20)
+website_text_entry.grid(row=1, column=1)
 website_text_entry.focus()
+
+search_button = Button(text='Search', command=search, width=13)
+search_button.grid(row=1, column=2)
+
 email_uname_label = Label(text='Email/Username:')
 email_uname_label.grid(row=2, column=0)
 
