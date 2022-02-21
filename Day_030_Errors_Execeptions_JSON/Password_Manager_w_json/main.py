@@ -67,8 +67,20 @@ def search():
         with open('data.json', 'r') as f:
             data = json.load(f)
             print(data[website])
+            password = data[website]['pwd']
+            email = data[website]['email']
+            pwd_entry.delete(0, END)
+            pwd_entry.insert(0, string=password)
+            email_uname_entry.delete(0, END)
+            email_uname_entry.insert(0, string=email)
     except FileNotFoundError:
-        print("no File!")
+        messagebox.showinfo(title='No saved passwords', message="There are no saved passwords\nPlease create and save a password to use the search function")
+    except KeyError:
+        print("Please enter a site name to search for")
+        if website:
+            messagebox.showinfo(title='Password not found', message=f"No entry for {website} found")
+        else: 
+            messagebox.showinfo(title='Password not found', message=f"Please enter a website in the website box to search")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
