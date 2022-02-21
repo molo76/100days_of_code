@@ -61,24 +61,27 @@ def save():
 
 
 def search():
-    print('im looking for something')
     website = website_text_entry.get()
     try:
         with open('data.json', 'r') as f:
             data = json.load(f)
-            print(data[website])
             password = data[website]['pwd']
             email = data[website]['email']
             pyperclip.copy(password)
-            messagebox.showinfo(title='Password found', message=f'Website = {website}\nEmail = {email}\nPassword = {password}\n\nThe password has been copied to your clipboard')
+            messagebox.showinfo(title='Password found', message=f'Website = {website}\n'
+                                                                f'Email = {email}\nPassword = {password}\n\n'
+                                                                'The password has been copied to your clipboard')
     except FileNotFoundError:
-        messagebox.showinfo(title='No saved passwords', message="There are no saved passwords\nPlease create and save a password to use the search function")
+        messagebox.showinfo(title='No saved passwords', message="There are no saved passwords\n"
+                                                                "Please create and save a password "
+                                                                "to use the search function")
     except KeyError:
-        print("Please enter a site name to search for")
         if website:
             messagebox.showinfo(title='Password not found', message=f"No entry for {website} found")
         else: 
-            messagebox.showinfo(title='Password not found', message=f"Please enter a website in the website box to search")
+            messagebox.showinfo(title='Password not found', message="Please enter a website in the "
+                                                                    "website box to search")
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 
