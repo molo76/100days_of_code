@@ -4,7 +4,7 @@ from random import choice
 
  
 def pick_quote():
-    with open('monday_quotes.txt') as f:
+    with open('/Users/martyn/Devel/python/100days/Day_032_Automated_Birthday_Wisher/monday_quotes.txt') as f:
         quotes = f.read()
         quote_list = quotes.split('\n')
     return choice(quote_list)
